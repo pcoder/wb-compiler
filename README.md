@@ -1,7 +1,7 @@
 wb-compiler
 ===========
 
-This is a sub project of [Wisebender](https://github.com/pcoder/wisebender.git "Wisebender"). The script in this project, picks up the projects created on the Wisebender server and compiles them according to various parameters.
+This is a sub project of [Wisebender](https://github.com/pcoder/wisebender.git "Wisebender") and comprises of a single php script file. The script in this project, picks up the projects created on the Wisebender server and compiles them according to various parameters.
 
 The script accepts JSON request in the following form:
 
