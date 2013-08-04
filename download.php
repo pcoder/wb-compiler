@@ -1,14 +1,14 @@
 <?php
-$request_body = file_get_contents('php://input');
-$my_data = json_decode($request_body,true);
+//$request_body = file_get_contents('php://input');
+//$my_data = json_decode($request_body,true);
 
 
 $PROJECTS_BASE_PATH="/wisebender/sketches/";
 $basepath="/compiler/app/";
-$isense_sub_path="out/isense/";
+$isense_sub_path="out/isense/tmp/";
 
-$fname=$my_data["fname"];
-$pname=$my_data["pname"];
+$fname=$_GET["fname"];
+$pname=$_GET["pname"];
 
 if(trim($pname) == "")
 {
@@ -18,7 +18,6 @@ if(trim($pname) == "")
 $ret = array();
 $file = $basepath . $isense_sub_path . $fname; 
 if(file_exists($file )){
-
 
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
@@ -31,8 +30,7 @@ if(file_exists($file )){
     ob_clean();
     flush();
     echo utf8_encode(file_get_contents($file));
-    //readfile($file);
-	//unlink($file);
+	unlink($file);
     exit;	
 }else{
 	$ret['success'] = false;
