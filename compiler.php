@@ -15,9 +15,15 @@ foreach ($my_data['files'] as $key => $value){
 
 chdir( $basepath );
 
-file_put_contents($basepath."Makefile.path" ,
+if(trim(strtolower($wiselibUUID)) == "default"){
+    // compile the app. against the latest Wiselib source
+	$PROJECTS_BASE_PATH="/var/www/wisebender/Symfony/wiselib/";
+    	file_put_contents($basepath."Makefile.path" ,
+	"export WISELIB_BASE=".$PROJECTS_BASE_PATH ,LOCK_EX);
+}else{
+	file_put_contents($basepath."Makefile.path" ,
 	"export WISELIB_BASE=".$PROJECTS_BASE_PATH.$username."/".$wiselibUUID."/",LOCK_EX);
-
+}
 exec ( "make ".$makeTarget,$retstr,$retval);
 
 $isense_sub_path="out/isense/app.bin";
@@ -31,20 +37,12 @@ fclose($handle);
 $response["success"]=$retval===0;
 $response["size"]=$size;
 $response["message"]=implode("<br/>",$retstr);
-//file_put_contents($basepath."app.before",$contents), LOCK_EX);
 
 $tmpfname = tempnam($basepath . "out/isense/tmp/", "app_");
-
 $handle = fopen($basepath. "out/isense/tmp/" . basename($tmpfname), "w");
 fwrite($handle, $contents);
 fclose($handle);
 
 $response["output"]= basename($tmpfname);
-
 print_r(json_encode($response));
-
-//unlink($basepath."app.cpp");
-//unlink($basepath.$isense_sub_path);
-//print_r($my_data['files']);
-
 ?>
