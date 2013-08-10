@@ -24,24 +24,25 @@ if(trim(strtolower($wiselibUUID)) == "default"){
 	file_put_contents($basepath."Makefile.path" ,
 	"export WISELIB_BASE=".$PROJECTS_BASE_PATH.$username."/".$wiselibUUID."/",LOCK_EX);
 }
-exec ( "make ".$makeTarget,$retstr,$retval);
+exec ( "make ".$makeTarget." 2>&1",$retstr,$retval);
 
 $isense_sub_path="out/isense/app.bin";
 $size = filesize ( $basepath.$isense_sub_path );
+$tmpfname = tempnam($basepath . "out/isense/tmp/", "app_");
 
-$handle = fopen($basepath.$isense_sub_path, "r");
-$contents = fread($handle, filesize($basepath.$isense_sub_path));
-fclose($handle);
+copy( $basepath.$isense_sub_path , $tmpfname );
+//$handle = fopen($basepath.$isense_sub_path, "rb");
+//$contents = fread($handle, filesize($basepath.$isense_sub_path));
+//fclose($handle);
 
 
 $response["success"]=$retval===0;
 $response["size"]=$size;
 $response["message"]=implode("<br/>",$retstr);
 
-$tmpfname = tempnam($basepath . "out/isense/tmp/", "app_");
-$handle = fopen($basepath. "out/isense/tmp/" . basename($tmpfname), "w");
-fwrite($handle, $contents);
-fclose($handle);
+//$handle = fopen($basepath. "out/isense/tmp/" . basename($tmpfname), "w");
+//fwrite($handle, $contents);
+//fclose($handle);
 
 $response["output"]= basename($tmpfname);
 print_r(json_encode($response));

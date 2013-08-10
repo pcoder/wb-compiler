@@ -29,7 +29,7 @@ if(file_exists($file )){
     header('Content-Length: ' . filesize($file));
     ob_clean();
     flush();
-    echo utf8_encode(file_get_contents($file));
+    readfile($file);
 	unlink($file);
     exit;	
 }else{
