@@ -52,6 +52,10 @@ $response["success"]=$retval===0;
 $response["size"]=$size;
 $response["message"]=implode("<br/>",$retstr);
 
+if($makeTarget == 'shawn'){
+$response['message'] = "Not implemented yet. Please try again in some days.";
+$response["success"] = false;
+}
 //$handle = fopen($basepath. "out/isense/tmp/" . basename($tmpfname), "w");
 //fwrite($handle, $contents);
 //fclose($handle);
