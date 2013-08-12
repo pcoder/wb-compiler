@@ -41,10 +41,10 @@ exec ( "make ".$makeTarget." 2>&1",$retstr,$retval);
 $tmpfname = "";
 if($makeTarget == 'shawn'){
 	$isense_sub_path="./app";
-	$tmpfname = tempnam($basepath . "out/shawn/tmp/", "app_");
+	$tmpfname = tempnam($basepath . "out/binary/", "app_");
 }else{
 	$isense_sub_path="out/isense/app.bin";
-	$tmpfname = tempnam($basepath . "out/isense/tmp/", "app_");
+	$tmpfname = tempnam($basepath . "out/binary/", "app_");
 }
 	$size = filesize ( $basepath.$isense_sub_path );
 
