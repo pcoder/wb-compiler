@@ -4,11 +4,15 @@ $isense_sub_path="out/binary/";
 
 $fname=$_GET["fname"];
 $pname=$_GET["pname"];
+$platform=trim(strtolower($_GET["platform"]));
 
 if(trim($pname) == "")
 {
 	$pname="app";
 }
+
+if($platform != "shawn")
+	$pname.=".bin";
 
 $ret = array();
 $file = $basepath . $isense_sub_path . $fname; 
@@ -16,7 +20,7 @@ if(file_exists($file )){
 
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename='. $pname . '.bin');
+    header('Content-Disposition: attachment; filename='. $pname);
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');
