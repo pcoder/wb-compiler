@@ -1,11 +1,6 @@
 <?php
-//$request_body = file_get_contents('php://input');
-//$my_data = json_decode($request_body,true);
-
-
-$PROJECTS_BASE_PATH="/wisebender/sketches/";
 $basepath="/compiler/app/";
-$isense_sub_path="out/isense/tmp/";
+$isense_sub_path="out/binary/";
 
 $fname=$_GET["fname"];
 $pname=$_GET["pname"];
