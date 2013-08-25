@@ -63,11 +63,11 @@ if($makeTarget == 'shawn'){
 }
 	$size = filesize ( $basepath.$isense_sub_path );
 
-    echo ("iss = " . $isense_sub_path . ", reading file =" .$user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path);
-    $app = file_get_contents($user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path);
-    file_put_contents($tmpfname, $app);
+//    echo ("iss = " . $isense_sub_path . ", reading file =" .$user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path);
+//    $app = file_get_contents($user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path);
+ //   file_put_contents($tmpfname, $app);
 
-//copy( $user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path , $tmpfname );
+copy( $user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path , $tmpfname );
 
 $response["success"]=$retval===0;
 $response["size"]=$size;
