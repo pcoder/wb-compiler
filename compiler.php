@@ -4,8 +4,10 @@ $my_data = json_decode($request_body,true);
 
 $PROJECTS_BASE_PATH="/wisebender/sketches/";
 $basepath="/compiler/app/";
+$uf_predicate="_app_" . @date('His');
 
 $username=$my_data["username"];
+$project=$my_data["project"];
 $wiselibUUID=$my_data["wiselibUUID"];
 $makeTarget=trim(strtolower($my_data["build"]));
 
@@ -21,19 +23,26 @@ switch($makeTarget){
 		break;
 }
 
+$user_com_folder = $basepath . $username . $uf_predicate;
+
+if(!file_exists($user_com_folder)){
+	mkdir($user_com_folder);
+    copy($basepath . "Makefile", $user_com_folder);
+} 
+
 foreach ($my_data['files'] as $key => $value){
-        file_put_contents($basepath."app.cpp", html_entity_decode($value['content']), LOCK_EX);
+        file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . $key, html_entity_decode($value['content']), LOCK_EX);
 }
 
-chdir( $basepath );
+chdir($user_com_folder);
 
 if(trim(strtolower($wiselibUUID)) == "default"){
     // compile the app. against the latest Wiselib source
 	$PROJECTS_BASE_PATH="/var/www/wisebender/Symfony/wiselib/";
-    	file_put_contents($basepath."Makefile.path" ,
+    	file_put_contents($user_com_folder. DIRECTORY_SEPARATOR . "Makefile.path" ,
 	"export WISELIB_BASE=".$PROJECTS_BASE_PATH ,LOCK_EX);
 }else{
-	file_put_contents($basepath."Makefile.path" ,
+	file_put_contents($user_com_folder.DIRECTORY_SEPARATOR . "Makefile.path" ,
 	"export WISELIB_BASE=".$PROJECTS_BASE_PATH.$username."/".$wiselibUUID."/",LOCK_EX);
 }
 exec ( "make ".$makeTarget." 2>&1",$retstr,$retval);
