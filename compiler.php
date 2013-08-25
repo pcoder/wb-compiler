@@ -4,7 +4,7 @@ $my_data = json_decode($request_body,true);
 
 $PROJECTS_BASE_PATH="/wisebender/sketches/";
 $basepath="/compiler/app/";
-$uf_predicate="_app_" . @date('His');
+$uf_predicate="_app_" . @date('MMDDYYHis');
 
 $username=$my_data["username"];
 $project=$my_data["project"];
