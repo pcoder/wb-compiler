@@ -28,7 +28,7 @@ $user_com_folder = $basepath . $username . $uf_predicate;
 if(!file_exists($user_com_folder)){
 	@mkdir($user_com_folder);
 	echo("basepath=" . $basepath . "Makefile === " . $user_com_folder); 
-    @copy($basepath . "Makefile", $user_com_folder);
+    @copy($basepath . "Makefile", $user_com_folder. DIRECTORY_SEPARATOR . "Makefile");
 } 
 
 foreach ($my_data['files'] as $key => $value){
