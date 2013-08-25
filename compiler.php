@@ -55,7 +55,7 @@ exec ("make ".$makeTarget." 2>&1",$retstr,$retval);
 
 $tmpfname = "";
 if($makeTarget == 'shawn'){
-	$isense_sub_path="./app";
+	$isense_sub_path="out/app";
 	$tmpfname = tempnam($basepath . "out/binary/", "app_");
 }else{
 	$isense_sub_path="out/isense/app.bin";
