@@ -35,7 +35,7 @@ foreach ($my_data['files'] as $key => $value){
 if(strcmp($value["filename"], $project . "_app.cpp") ==0){
         file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . "app.cpp", html_entity_decode($value['content']), LOCK_EX);
 }else{
-        file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . $key, html_entity_decode($value['content']), LOCK_EX);
+        file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . $value["filename"], html_entity_decode($value['content']), LOCK_EX);
 }
 }
 
