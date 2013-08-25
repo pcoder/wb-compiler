@@ -26,13 +26,13 @@ switch($makeTarget){
 $user_com_folder = $basepath . $username . $uf_predicate;
 
 if(!file_exists($user_com_folder)){
-	mkdir($user_com_folder);
-    copy($basepath . "Makefile", $user_com_folder);
+	@mkdir($user_com_folder);
+    @copy($basepath . "Makefile", $user_com_folder);
 } 
 
 foreach ($my_data['files'] as $key => $value){
 
-if(strcmp($key, $project . "_app.cpp") ==0){
+if(strcmp($value["filename"], $project . "_app.cpp") ==0){
         file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . "app.cpp", html_entity_decode($value['content']), LOCK_EX);
 }else{
         file_put_contents($user_com_folder . DIRECTORY_SEPARATOR . $key, html_entity_decode($value['content']), LOCK_EX);
@@ -50,7 +50,7 @@ if(trim(strtolower($wiselibUUID)) == "default"){
 	file_put_contents($user_com_folder.DIRECTORY_SEPARATOR . "Makefile.path" ,
 	"export WISELIB_BASE=".$PROJECTS_BASE_PATH.$username."/".$wiselibUUID."/",LOCK_EX);
 }
-exec ( "make ".$makeTarget." 2>&1",$retstr,$retval);
+exec ("make ".$makeTarget." 2>&1",$retstr,$retval);
 
 $tmpfname = "";
 if($makeTarget == 'shawn'){
