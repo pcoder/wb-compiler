@@ -64,7 +64,7 @@ if($makeTarget == 'shawn'){
 	$size = filesize ( $basepath.$isense_sub_path );
 
 
-copy( $basepath.$isense_sub_path , $tmpfname );
+copy( $user_com_folder. DIRECTORY_SEPARATOR. $isense_sub_path , $tmpfname );
 
 $response["success"]=$retval===0;
 $response["size"]=$size;
